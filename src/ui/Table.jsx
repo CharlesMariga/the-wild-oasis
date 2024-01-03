@@ -54,12 +54,12 @@ const Footer = styled.footer`
   }
 `;
 
-// const Empty = styled.p`
-//   font-size: 1.6rem;
-//   font-weight: 500;
-//   text-align: center;
-//   margin: 2.4rem;
-// `;
+const Empty = styled.p`
+  font-size: 1.6rem;
+  font-weight: 500;
+  text-align: center;
+  margin: 2.4rem;
+`;
 
 const TableContext = createContext();
 
@@ -89,12 +89,15 @@ Header.propTypes = {
   children: PropTypes.any,
 };
 
-function Body({ children }) {
-  return <StyledBody>{children}</StyledBody>;
+function Body({ data, render }) {
+  if (!data.length) return <Empty>No data to show at the moment</Empty>;
+
+  return <StyledBody>{data.map(render)}</StyledBody>;
 }
 
 Body.propTypes = {
-  children: PropTypes.any,
+  data: PropTypes.array,
+  render: PropTypes.func,
 };
 
 function Row({ children }) {
