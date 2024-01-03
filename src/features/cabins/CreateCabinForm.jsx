@@ -11,7 +11,7 @@ import FormRow from "../../ui/FormRow";
 import { useCreateCabin } from "./useCreateCabin";
 import { useUpdateCabin } from "./useUpdateCabin";
 
-export default function CreateCabinForm({ cabinToEdit = {} }) {
+export default function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   const { id: editId, ...editValue } = cabinToEdit;
   const isEditSesseion = Boolean(editId);
 
@@ -33,8 +33,8 @@ export default function CreateCabinForm({ cabinToEdit = {} }) {
       editCabin(
         { newCabinData: { ...data, image }, id: editId },
         {
-          onSuccess: (data) => {
-            console.log(data);
+          onSuccess: () => {
+            onCloseModal?.();
             reset();
           },
         }
@@ -43,9 +43,9 @@ export default function CreateCabinForm({ cabinToEdit = {} }) {
       createCabin(
         { ...data, image: image },
         {
-          onSuccess: (data) => {
-            console.log(data);
+          onSuccess: () => {
             reset();
+            onCloseModal?.();
           },
         }
       );
@@ -56,7 +56,10 @@ export default function CreateCabinForm({ cabinToEdit = {} }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit, onError)}>
+    <Form
+      onSubmit={handleSubmit(onSubmit, onError)}
+      type={onCloseModal ? "modal" : "regular"}
+    >
       <FormRow label="Cabin name" error={errors?.name?.message}>
         <Input
           type="text"
@@ -131,7 +134,11 @@ export default function CreateCabinForm({ cabinToEdit = {} }) {
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button variation="secondary" type="reset">
+        <Button
+          variation="secondary"
+          type="reset"
+          onClick={() => onCloseModal?.()}
+        >
           Cancel
         </Button>
         <Button disabled={isPending}>
@@ -144,4 +151,5 @@ export default function CreateCabinForm({ cabinToEdit = {} }) {
 
 CreateCabinForm.propTypes = {
   cabinToEdit: PropTypes.object,
+  onCloseModal: PropTypes.func,
 };
