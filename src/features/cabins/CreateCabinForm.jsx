@@ -8,8 +8,8 @@ import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
 import FormRow from "../../ui/FormRow";
 
-import useCreateCabin from "./useCreateCabin";
-import useEditCabin from "./useEditCabin";
+import { useCreateCabin } from "./useCreateCabin";
+import { useEditCabin } from "./useEditCabin";
 
 export default function CreateCabinForm({ cabinToEdit = {} }) {
   const { id: editId, ...editValue } = cabinToEdit;

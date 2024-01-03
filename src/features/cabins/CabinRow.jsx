@@ -7,7 +7,7 @@ import { HiPencil, HiSquare2Stack, HiTrash } from "react-icons/hi2";
 import CreateCabinForm from "./CreateCabinForm";
 import { useDeleteCabin } from "./useDeleteCabin";
 import { formatCurrency } from "../../utils/helpers";
-import useCreateCabin from "./useCreateCabin";
+import { useCreateCabin } from "./useCreateCabin";
 
 const TableRow = styled.div`
   display: grid;
