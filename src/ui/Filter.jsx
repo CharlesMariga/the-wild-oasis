@@ -36,12 +36,12 @@ const FilterButton = styled.button`
   }
 `;
 
-export default function Filter({ filteredField, options }) {
+export default function Filter({ filterField, options }) {
   const [searchParams, setSearchParams] = useSearchParams();
-  const currentFilter = searchParams.get(filteredField) || options[0].value;
+  const currentFilter = searchParams.get(filterField) || options[0].value;
 
   function handleClick(value) {
-    searchParams.set(filteredField, value);
+    searchParams.set(filterField, value);
     setSearchParams(searchParams);
   }
 
@@ -62,6 +62,6 @@ export default function Filter({ filteredField, options }) {
 }
 
 Filter.propTypes = {
-  filteredField: PropTypes.string,
+  filterField: PropTypes.string,
   options: PropTypes.array,
 };
